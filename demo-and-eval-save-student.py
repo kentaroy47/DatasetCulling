@@ -597,6 +597,7 @@ if __name__ == '__main__':
           for row in reversed(dellist):
              allbox[i][ii]=np.delete(allbox[i][ii],(row),axis=0) 
           
+  coco_classes = coco_class_util()
   
   # write out in pascal voc 2007 order
   if len(allbox)==81:
