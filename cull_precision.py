@@ -118,12 +118,12 @@ finalimagelist = finalimagelist2
 finalpredictions = choose_answer_limit(predictionlist, range(0,21), top_key)
 
 # dump top_key for confirmation
-subprocess("mkdir keys", shell=True)
+subprocess.call("mkdir keys", shell=True)
 with open("keys/"+str(topx)+"-ltrain-"+dataset+".pkl", 'wb') as f:
     pickle.dump(top_key, f, pickle.HIGHEST_PROTOCOL)
 
 # copy images to a folder and keep the answers in a list.
-dest = "images/"+str(topx)+"-ltrain-"+dataset+"_train"
+dest = "images/"+str(topx)+"-"+dataset+"_train"
 import os
 if not os.path.isdir(dest):
     subprocess.call("mkdir "+dest, shell=True)
@@ -134,12 +134,8 @@ for i, image in enumerate(finalimagelist2):
     subprocess.call("cp "+image+" "+dest+"/ltrain"+str(num)+".jpg", shell=True)
     
 # save the final list of answers in pickle file
-with open("output/baseline/"+str(topx)+"-ltrain-"+dataset+"train-res101.pkl", 'wb') as f:
+with open("output/baseline/"+str(topx)+"-"+dataset+"train-res101.pkl", 'wb') as f:
     pickle.dump(finalpredictions, f, pickle.HIGHEST_PROTOCOL)
 
 print("==== conversion completed! ====")
 
-import subprocess
-command='python script_makevoc.py --dataset '+str(topx)+'-ltrain-'+dataset
-subprocess.call(command, shell=True)
-print("==== dataset make completed! ====")

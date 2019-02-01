@@ -19,12 +19,14 @@ parser.add_argument('--sample', dest='sample',
                       help='training dataset', type=str, default='0')
 parser.add_argument('--filterpix', dest='filterpix',
                       help='filter pixel size', type=str, default=20)
+parser.add_argument('--topx', dest='topx',
+                      help='filter pixel size', type=str, default="64")
 parser.add_argument('--net', dest='net',
                       help='target network', type=str, default="res101")
 parser.add_argument('--dsm', dest='dsm',
                       help='filter pixel size', type=bool, default=False)
 args = parser.parse_args()
-target=args.dataset
+target =  args.topx + "-" +args.dataset 
 filterpix = str(args.filterpix)
 
 # make dir in datasets
@@ -48,7 +50,7 @@ if args.dsm:
     command="python xml_makelabels_domain.py --dataset "+target+" --numobj "+args.numobj + \
     " --sample "+args.sample+" --filterpix "+filterpix+" --net "+args.net+" --dsm "+str(args.dsm)
 else:
-    command="python xml_makelabels_domain.py --dataset "+target+" --numobj "+args.numobj + \
+    command="python xml_makelabels_domain.py --topx "+args.topx+" --dataset "+target+" --numobj "+args.numobj + \
     " --sample "+args.sample+" --filterpix "+filterpix+" --net "+args.net
 print("com:", command)
 
@@ -59,7 +61,7 @@ command="cp -rf output/"+target+"-train-labels-"+args.net+"/* data/"+datasetname
 subprocess.call(command, shell=True)
 command="cp -rf output/"+target+"-test-labels-"+args.net+"/* data/"+datasetname+"/VOC2007/Annotations/"
 subprocess.call(command, shell=True)
-command="cp -rf /data2/lost+found/img/"+target+"_train/* data/"+datasetname+"/VOC2007/JPEGImages/"
+command="cp -rf images/"+target+"_train/* data/"+datasetname+"/VOC2007/JPEGImages/"
 subprocess.call(command, shell=True)
 command="cp -rf /data2/lost+found/img/"+target+"_val/* data/"+datasetname+"/VOC2007/JPEGImages/"
 subprocess.call(command, shell=True)
@@ -71,7 +73,7 @@ subprocess.call(command, shell=True)
 # make models and copy
 command="mkdir models/res18/pascal_voc_"+target
 subprocess.call(command, shell=True)
-command="cp models/faster_rcnn_500_40_625.pth models/res18/pascal_voc_"+target
+command="cp models/res18/pascal_voc/faster_rcnn_500_40_625.pth models/res18/pascal_voc_"+target
 subprocess.call(command, shell=True)
 #command="mkdir models/squeeze/pascal_voc_"+target
 #subprocess.call(command, shell=True)

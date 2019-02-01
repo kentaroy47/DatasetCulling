@@ -22,6 +22,8 @@ parser.add_argument('--sample', dest='sample',
                       help='training dataset', type=str, default=0)
 parser.add_argument('--filterpix', dest='filterpix',
                       help='filter pixel size', type=str, default=40)
+parser.add_argument('--topx', dest='topx',
+                      help='filter pixel size', type=str, default=64)
 parser.add_argument('--net', dest='net',
                       help='target network', type=str, default="res101")
 parser.add_argument('--dsm', dest='dsm',
@@ -31,7 +33,7 @@ target=args.dataset
 args.numobj=int(args.numobj)
 
 xmlsource = '/home/ken/datasets/VOC2007/VOCdevkit/VOC2007/Annotations/'
-datasource = '/data2/lost+found/img/'+target+'_train/*'
+datasource = 'images/'+target+'_train/*'
 resultsdir = 'output/baseline/'+target+'train-res101.pkl'
 if not args.dsm:
     valdir = 'output/baseline/'+target+'val-res101.pkl'

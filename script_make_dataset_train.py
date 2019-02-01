@@ -8,6 +8,10 @@ topx = str(64)
 # target dataset
 target = "jackson2"
 
+print("make dirs")
+subprocess.call("mkdir trainval",shell=True)
+subprocess.call("mkdir data",shell=True)
+
 # make dataset.
     # make student predictions
 if not (os.path.isfile("output/"+target+"-res18-"+topx+".pkl")):
@@ -32,5 +36,7 @@ com = "python script_makevoc.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
 # train DSM model.
+com = "python trainval_net_ds_savemod.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18"
+subprocess.call(com, shell=True)
 
 # test DSM model.
