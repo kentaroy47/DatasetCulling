@@ -113,3 +113,5 @@ subprocess.call("rm images/confusion-"+dataset+"/*", shell = True)
 for i, image in enumerate(finalimagelist):
     if i in top_key:
         subprocess.call("cp "+image+" images/confusion-"+dataset, shell =True)
+        
+print("finished culling dataset by confusion")

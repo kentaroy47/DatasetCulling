@@ -167,6 +167,9 @@ def parse_args():
   parser.add_argument('--cag', dest='class_agnostic',
                       help='whether perform class_agnostic bbox regression',
                       action='store_true')
+  parser.add_argument('--topx', dest='topx',
+                      help='whether perform class_agnostic bbox regression'
+                      )
   parser.add_argument('--parallel_type', dest='parallel_type',
                       help='which part of model to parallel, 0: all, 1: model before roi pooling',
                       default=0, type=int)
@@ -441,9 +444,7 @@ if __name__ == '__main__':
       if len(im_in.shape) == 2:
         im_in = im_in[:,:,np.newaxis]
         im_in = np.concatenate((im_in,im_in,im_in), axis=2)
-      # rgb -> bgr
-#      im = im_in[:,:,::-1]
-#      im = im_in[240:400,:480,0:3]
+        
       im = im_in
 
       blobs, im_scales = _get_image_blob(im)
@@ -613,6 +614,6 @@ if __name__ == '__main__':
   
     
   import pickle
-  outfile = 'output/' + args.target + '-' + args.net + '.pkl'
+  outfile = 'output/' + args.target + '-' + args.net + '-' + args.topx + '.pkl'
   with open(outfile, 'wb') as f:
           pickle.dump(all_boxes, f, pickle.HIGHEST_PROTOCOL)
