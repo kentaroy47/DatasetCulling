@@ -51,5 +51,5 @@ com = "python trainval_net_ds_savemod.py --dataset pascal_voc_"+topx+"-"+target+
 subprocess.call(com, shell=True)
 
 # test DSM model.
-com = "python demo-and-eval-save.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18 --r True --checksession 1 --checkepoch 20 --image_dir images/jackson2_val --truth TBD"
+com = "python demo-and-eval-save.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18 --r True --checksession 1 --checkepoch 20 --image_dir images/jackson2_val --truth output/baseline/jackson2_val.pkl"
 subprocess.call(com, shell=True)
