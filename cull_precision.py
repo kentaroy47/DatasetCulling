@@ -18,20 +18,13 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
 parser.add_argument('--topx', dest='topx',
-                      default=64)
+                      default=512)
 parser.add_argument('--dataset', dest='dataset',
                       default="kentucky")
 parser.add_argument('--subsample', dest='subsample',
                       default=1, type=int)
-parser.add_argument('--Q', dest='Q',
-                      default=4, type=int)
 args = parser.parse_args()
-
-# the we reduce the images until topx*4
-topx = int(args.topx)*4
-
-Q = int(args.Q)
-
+topx = (args.topx)
 
 # get keys over threshold
 def pick_keys(count_data, threshold):
@@ -48,6 +41,7 @@ predictionlist = []
 countperson = []
 countcar = []
 finalltrain = []
+finalconfusion = []
 
 # loop through the dataset
 for x in [1]:
@@ -56,53 +50,61 @@ for x in [1]:
 
         
         dataset = args.dataset
-        # read pickle
-        with open("output/"+dataset+"-res18.pkl", "rb") as f:
-           student = pickle.load(f)       
        # obtain predictions of teacher
+        with open("output/"+dataset+"-confusion-res18.pkl", "rb") as f:
+           student = pickle.load(f)
+        with open("output/"+dataset+"-res101-"+topx+".pkl", "rb") as f:
+           teacher = pickle.load(f)
        # get image list
-        temp = sorted(glob.glob("images/"+dataset+"_train/*"))
+        temp = sorted(glob.glob("images/confusion-"+dataset+"/*"))
         for x in temp:
             if "val" not in x:
                 imagelist.append(x)
         
        # convert teacher's predictions to pascal format.
        # filter small -> class==20 -> make car class.
+        teacher2 = coco2pascal(teacher)
         student2 = coco2pascal(student) # for filtering
         
         # count objects
         countperson.extend(count_image(student2, 15))
         countcar.extend(count_image(student2, 7))
         
-        # for coral
-        if dataset == "coral":
-           student2[7] = student2[15]
-           
         # derive ltrain
-        # get list of ltrain.
+               # get list of ltrain.
         ltrain = []
-        ltrain, outap = compute_confusion_top(student2, dataset, Q)
-       
+        confusion = []
+        
+        # compute confusion and precision
+        ltrain, monap = compute_ltrain_top(student2, teacher2, dataset)
+                   
        # concat ltrain in long list
        # ltrain can be a bit long.. handle exceptions
         if len(ltrain)!=len(imagelist):
            finalltrain.extend(ltrain[:-1])
         else:
            finalltrain.extend(ltrain)
-           # make prediction list
-        student = conv20class(student)
-        if len(student[7])!=len(imagelist):
-           predictionlist = add_answer_cut(predictionlist, student)
+
+        if len(confusion)!=len(imagelist):
+           finalconfusion.extend(ltrain[:-1])
         else:
-           predictionlist = add_answer(predictionlist, student)
+           finalconfusion.extend(ltrain)
        
         # make a image list as well
         finalimagelist.extend(imagelist)
        
+       # make prediction list
+        teacher = conv20class(teacher)
+        if len(teacher[7])!=len(imagelist):
+           predictionlist = add_answer_cut(predictionlist, teacher)
+        else:
+           predictionlist = add_answer(predictionlist, teacher)
+
 # confirm length
+print("prediction length:", len(predictionlist[1]))
 print("image length:", len(finalimagelist))
 
-# pick in ltrain
+# pick in ltrain second
 top_key = sorted(range(len(finalltrain)), key=lambda i: finalltrain[i], reverse=True)[:int(topx)]
 
 # make image list
@@ -110,19 +112,34 @@ finalimagelist2 = []
 finalpredictions = []
 for key in top_key:
     finalimagelist2.append(finalimagelist[key])
+finalimagelist = finalimagelist2
 
-# make new dataset.
-subprocess.call("mkdir images/confusion-"+dataset, shell=True)
-subprocess.call("rm images/confusion-"+dataset+"/*", shell = True)
-
-for i, image in enumerate(finalimagelist):
-    if i in top_key:
-        subprocess.call("cp "+image+" images/confusion-"+dataset, shell =True)
-        
 # make predictions
 finalpredictions = choose_answer_limit(predictionlist, range(0,21), top_key)
 
-with open("output/"+dataset+"-confusion-res18.pkl", 'wb') as f:
+# dump top_key for confirmation
+subprocess("mkdir keys", shell=True)
+with open("keys/"+str(topx)+"-ltrain-"+dataset+".pkl", 'wb') as f:
+    pickle.dump(top_key, f, pickle.HIGHEST_PROTOCOL)
+
+# copy images to a folder and keep the answers in a list.
+dest = "images/"+str(topx)+"-ltrain-"+dataset+"_train"
+import os
+if not os.path.isdir(dest):
+    subprocess.call("mkdir "+dest, shell=True)
+#    if not os.path.isfile(dest+"/*.jpg"):
+print("number of images..", len(finalimagelist2))
+for i, image in enumerate(finalimagelist2):
+    num = '%04d' % i
+    subprocess.call("cp "+image+" "+dest+"/ltrain"+str(num)+".jpg", shell=True)
+    
+# save the final list of answers in pickle file
+with open("output/baseline/"+str(topx)+"-ltrain-"+dataset+"train-res101.pkl", 'wb') as f:
     pickle.dump(finalpredictions, f, pickle.HIGHEST_PROTOCOL)
-        
-print("finished culling dataset by confusion")
+
+print("==== conversion completed! ====")
+
+import subprocess
+command='python script_makevoc.py --dataset '+str(topx)+'-ltrain-'+dataset
+subprocess.call(command, shell=True)
+print("==== dataset make completed! ====")

@@ -28,7 +28,7 @@ com = "python cull_precision.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
 # compile difficult dataset.
-com = "python make_dataset.py --dataset "+target+" --topx "+topx
+com = "python script_makevoc.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
 # train DSM model.
