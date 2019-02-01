@@ -453,9 +453,9 @@ if __name__ == '__main__':
             optimizer.load_state_dict(checkpoint['optimizer'])
         except:
             if 'res' in args.net:
-                model_coco = resnet(range(81), depth, pretrained=True, class_agnostic=args.class_agnostic)    
+                model_coco = resnet(range(81), depth, pretrained=False, class_agnostic=args.class_agnostic)    
             elif 'squeeze' in args.net:
-                model_coco = squeeze(range(81), pretrained=True, class_agnostic=args.class_agnostic)    
+                model_coco = squeeze(range(81), pretrained=False, class_agnostic=args.class_agnostic)    
             model_coco.create_architecture()
             model_coco.load_state_dict(checkpoint['model'])
             pretrained_dict = model_coco.state_dict()

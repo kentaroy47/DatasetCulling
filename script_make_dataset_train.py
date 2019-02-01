@@ -36,7 +36,7 @@ com = "python script_makevoc.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
 # train DSM model.
-com = "python trainval_net_ds_savemod.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18"
+com = "python trainval_net_ds_savemod.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18 --r True --checksession 500 --checkepoch 40 --checkpoint 625"
 subprocess.call(com, shell=True)
 
 # test DSM model.
