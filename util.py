@@ -348,7 +348,6 @@ def proposed_loss(x, Q):
     eps = 1e-5
     t = 0.5
     out = [-(x*np.log10(x+eps))*Q+(1-x)*np.exp(x)/(np.exp(x)+1)+t]
-#    out= [1/(816776*x^4-2E6*x^3+2E6*x^2-524983*x+69975)]
     return(out)
     
 def compute_confusion(sdata, Q):
