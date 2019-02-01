@@ -19,6 +19,9 @@ target = "jackson2"
 print("make dirs")
 subprocess.call("mkdir trainval",shell=True)
 subprocess.call("mkdir data",shell=True)
+subprocess.call("mkdir models",shell=True)
+subprocess.call("mkdir trainval",shell=True)
+subprocess.call("mkdir images",shell=True)
 
 # make dataset.
 # make student predictions
