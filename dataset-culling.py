@@ -40,7 +40,7 @@ subprocess.call("mkdir images",shell=True)
 # make student predictions
 print("making predictions using student model..")
 if not (os.path.isfile("output/"+target+"-res18-"+topx+".pkl")):
-    com = "python demo-and-eval-save-student.py --show True --vis --topx "+topx+" --target "+target+" --net res18 --image_dir images/"+target+"_train --coco True --cuda --dataset pascal_voc --checksession 500 --checkepoch 40 --checkpoint 625"
+    com = "python demo-and-eval-save-student.py --vis --topx "+topx+" --target "+target+" --net res18 --image_dir images/"+target+"_train --coco True --cuda --dataset pascal_voc --checksession 500 --checkepoch 40 --checkpoint 625"
     subprocess.call(com, shell=True)
 
 # culling by confusion.
