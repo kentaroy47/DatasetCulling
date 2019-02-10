@@ -22,9 +22,11 @@ Interestingly, for some data, we even find some accuracy improvements by Dataset
 ![Results](https://github.com/kentaroy47/DatasetCulling/blob/master/figure-of-dataset.png)
 Here are results of three scenes (more results in paper).
 
-Training a domain specific model with Dataset Culling, we can get upto 18x computation efficiency compared to large teacher models.
+We can get compared to large teacher models: 
 
-Moreover, the accuracy is almost the same.
+1) upto 18x computation efficiency!
+
+2) Similar or better detection accuracy!
 
 ## what does this repo do?
 This repo lets you try the pipeline with some domain specific data (traffic camera from YoutubeLive) and some pretrained models (COCO trained res18, res101 based FR-CNNs.)
