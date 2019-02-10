@@ -36,7 +36,9 @@ Dataset Culling conducts three operations in its pipeline.
 3. Optimization of the image resolution (optResolution).
 
 FYI: It might be interesting to look at my previous project, **training domain specific models** if you have interests in domain specific models itself.
+
 Github: https://github.com/kentaroy47/training-domain-specific-models
+
 arXiv: https://arxiv.org/abs/1811.02689
 
 # Setting up Dataset Culling enviroment
@@ -48,6 +50,7 @@ GPU enviroment recommended.
 
 **The faster R-CNN implementation is largely based on jwyang's repo.**
 Take a look at his readme if you get stuck during install..!
+
 https://github.com/jwyang/faster-rcnn.pytorch
 
 Don't hesitate to post issues or PRs if you find bugs. Thx.
