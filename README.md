@@ -50,11 +50,14 @@ Python3
 
 Pytorch 0.4.0 (major code fix required for pytorch 1.0..)
 
-GPU enviroment recommended.
+Cython
 
-**The faster R-CNN implementation is largely based on jwyang's repo.**
+GPU enviroment required now. can add CPU options but not scheduled.
 
-Take a look at his readme if you get stuck during install..!
+**The faster R-CNN implementation is largely based on jwyang's repo and require complie of cython scripts.**
+
+Cython parts must be compiled using lib/make.sh.
+Please look at jwyang's readme for the details.
 
 https://github.com/jwyang/faster-rcnn.pytorch
 
