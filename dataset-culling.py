@@ -10,11 +10,24 @@ Created on Thu Jan 31 21:36:21 2019
 
 import subprocess
 import os
+import argparse
 
-# how much to cull the dataset size to.
-topx = str(64)
+parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
+parser.add_argument('--topx', dest='topx',
+                      default=256)
+parser.add_argument('--dataset', dest='dataset',
+                      default="jackson2")
+parser.add_argument('--nodatasetculling', action='store_false')
+args = parser.parse_args()
+topx = (args.topx)
+
+# print stuff
+print("Dataset culling is :", args.nodatasetculling)
+print("Culling the dataset to:", args.topx)
+print("Target dataset:", args.dataset)
+
 # target dataset
-target = "jackson2"
+target = args.dataset
 
 print("make dirs")
 subprocess.call("mkdir trainval",shell=True)
