@@ -680,7 +680,6 @@ if __name__ == '__main__':
   # concat cars and cyclists.
   if "tennis" in args.dataset or "badminton" in args.dataset:
       a=1
-  else:
 #      all_boxes = addcars(all_boxes)
 #      all_boxes = addcyclists(all_boxes)
     

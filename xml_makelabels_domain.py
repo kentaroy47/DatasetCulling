@@ -306,12 +306,11 @@ for i,file in enumerate(trainvals[:train_num]):
                 a['bndbox']['ymax'] = int(np.floor(out[3]))
                 a['name'] = cls
 
-                # filter small bbox
+                # filter small and error bbox
                 if min(out[2]-out[0],out[3]-out[1]) > 20:                    
                     if min(out[2]-out[0],out[3]-out[1]) < filterpix:
                         a['difficult'] = 1
                     if (out[2]-out[0]) > 100 and (out[3]-out[1]) > 100 and cls == 'person' and "jackson" in args.dataset:
-                        print("large person")
                         break
                     doc['annotation']['object'].append(copy.deepcopy(a))
                     flag += 1
