@@ -4,9 +4,6 @@
 Created on Mon Nov 26 15:33:23 2018
 
 @author: ken
-
-v1.. just count the number of objects not regarding the class.
-v2.. pick the image that has most object in class, respectively.
 """
 
 import subprocess
@@ -67,7 +64,6 @@ for x in [1]:
                 imagelist.append(x)
         
        # convert teacher's predictions to pascal format.
-       # filter small -> class==20 -> make car class.
         student2 = coco2pascal(student) # for filtering
         
         # count objects
