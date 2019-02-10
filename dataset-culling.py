@@ -60,6 +60,7 @@ com = "python cull_precision.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
 # compile difficult dataset.
+print("compile difficult dataset..")
 com = "python script_makevoc.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 

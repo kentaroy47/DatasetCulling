@@ -52,6 +52,8 @@ Pytorch 0.4.0 (major code fix required for pytorch 1.0..)
 
 Cython
 
+xmltodict
+
 GPU enviroment required now. can add CPU options but not scheduled.
 
 Don't hesitate to post issues or PRs if you find bugs. Thx.
@@ -135,6 +137,9 @@ python dataset-culling.py --datasetculling False
 
 ### Repo Progress
 Upload initial commits (1/30/2019)
+
 Update readme (2/10/2019)
+
 Update initial models and dataset (2/10/2019)
+
 Enable optResolution in pipeline (TBD. next week maybe?)

@@ -405,7 +405,7 @@ if __name__ == '__main__':
 
   if args.resume:
     print("loading previous models..")
-    load_name = os.path.join(output_dir,
+    load_name = os.path.join("models/",
                          'faster_rcnn_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
     print("loading checkpoint %s" % (load_name))
     checkpoint = torch.load(load_name)
