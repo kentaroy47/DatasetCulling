@@ -1148,4 +1148,3 @@ with open("results/results-"+str(args.dataset)+"-"+str(args.checksession)+".txt"
     f.write("Train AP:" + str(aps[19]) + "\n")
     f.write("Truck AP:" + str(aps[20]) + "\n")
     f.write("Bear AP:" + str(aps[3]) + "\n")
-    

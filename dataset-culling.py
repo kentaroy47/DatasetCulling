@@ -73,7 +73,7 @@ if args.notrain:
 	subprocess.call(com, shell=True)
 
 # test DSM model.
-com = "python demo-and-eval-save.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18 --checksession 1 --checkepoch 20 --image_dir images/jackson2_val --truth output/baseline/jackson2_val.pkl"
+com = "python demo-and-eval-save.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18 --checksession 1 --checkepoch 20 --image_dir images/jackson2_val --truth output/baseline/jackson2val-res101.pkl"
 if args.notest:
 	subprocess.call(com, shell=True)
 

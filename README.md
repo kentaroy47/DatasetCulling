@@ -121,18 +121,31 @@ Please look at jwyang's readme for the details.
 https://github.com/jwyang/faster-rcnn.pytorch
 
 5. Apply Dataset Culling and train student models!
-Everything is in the script. The dataset will be constructed inside directory.
+Everything is in the script.
+ 
+The dataset will be constructed inside directory.
 
 ```py
 # Construct dataset with Dataset Culling. This takes about 15 minutes with 1080Ti.
 python dataset-culling.py
 
+# change the number of training sample like this. default is 256.
+python dataset-culling.py --topx 64
+
 # Train wihout Dataset Culling. This takes about 2~3 hours with 1080Ti.
+# not enabled yet but just disable culling parts.
 python dataset-culling.py --datasetculling False
 
 ```
 
 6. Eval results. 
+The test is also done in dataset-culling.
+
+You can just do test by..
+
+```
+python dataset-culling.py --notrain
+```
 
 
 ### Repo Progress
