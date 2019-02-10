@@ -19,7 +19,7 @@ parser.add_argument('--dataset', dest='dataset',
                       default="jackson2")
 parser.add_argument('--nodatasetculling', action='store_false')
 args = parser.parse_args()
-topx = (args.topx)
+topx = str(args.topx)
 
 # print stuff
 print("Dataset culling is :", args.nodatasetculling)
@@ -38,20 +38,24 @@ subprocess.call("mkdir images",shell=True)
 
 # make dataset.
 # make student predictions
+print("making predictions using student model..")
 if not (os.path.isfile("output/"+target+"-res18-"+topx+".pkl")):
     com = "python demo-and-eval-save-student.py --show True --vis --topx "+topx+" --target "+target+" --net res18 --image_dir images/"+target+"_train --coco True --cuda --dataset pascal_voc --checksession 500 --checkepoch 40 --checkpoint 625"
     subprocess.call(com, shell=True)
 
 # culling by confusion.
+print("culling by confusion..")
 com = "python cull_confusion.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
 # make teacher predictions.
+print("making teacher predictions..")
 if not (os.path.isfile("output/"+target+"-res101-"+topx+".pkl")):
     com = "python demo-and-eval-save-teacher.py --topx "+topx+" --target "+target+" --net res101 --image_dir images/confusion-"+target+" --coco True --cuda --dataset pascal_voc --checksession 1 --checkepoch 10 --checkpoint 9771"
     subprocess.call(com, shell=True)
 
 # culling by precision.
+print("culling by precision..")
 com = "python cull_precision.py --dataset "+target+" --topx "+topx
 subprocess.call(com, shell=True)
 
