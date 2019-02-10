@@ -47,10 +47,13 @@ arXiv: https://arxiv.org/abs/1811.02689
 
 ## Requirements
 Python3
+
 Pytorch 0.4.0 (major code fix required for pytorch 1.0..)
+
 GPU enviroment recommended.
 
 **The faster R-CNN implementation is largely based on jwyang's repo.**
+
 Take a look at his readme if you get stuck during install..!
 
 https://github.com/jwyang/faster-rcnn.pytorch
@@ -78,6 +81,11 @@ Download.. https://www.dropbox.com/s/dpq6qv0efspelr3/faster_rcnn_1_10_9771.pth?d
 Download.. https://drive.google.com/file/d/1KvrBMDYD5QtccjWbeKsLDZj6gBYRwVum/view?usp=sharing
 cd ..
 ```
+After this step, your "models" should include two files:
+
+faster_rcnn_500_40_625.pth (student 96MB)
+
+faster_rcnn_1_10_9771.pth (teacher 367MB)
 
 3. Download example Dataset
 I provide an short video from youtubelive to get started.
