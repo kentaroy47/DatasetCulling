@@ -54,13 +54,6 @@ Cython
 
 GPU enviroment required now. can add CPU options but not scheduled.
 
-**The faster R-CNN implementation is largely based on jwyang's repo and require complie of cython scripts.**
-
-Cython parts must be compiled using lib/make.sh.
-Please look at jwyang's readme for the details.
-
-https://github.com/jwyang/faster-rcnn.pytorch
-
 Don't hesitate to post issues or PRs if you find bugs. Thx.
 
 ## Instalation
@@ -102,7 +95,30 @@ tar -zxvf images.tar.gz
 
 ```
 
-4. Apply Dataset Culling and train student models!
+4. Compile Cython scripts.
+```
+cd lib
+sh make.sh
+```
+
+As pointed out by [ruotianluo/pytorch-faster-rcnn](https://github.com/ruotianluo/pytorch-faster-rcnn), choose the right `-arch` in `make.sh` file, to compile the cuda code:
+
+  | GPU model  | Architecture |
+  | ------------- | ------------- |
+  | TitanX (Maxwell/Pascal) | sm_52 |
+  | GTX 960M | sm_50 |
+  | GTX 1080 (Ti) | sm_61 |
+  | Grid K520 (AWS g2.2xlarge) | sm_30 |
+  | Tesla K80 (AWS p2.xlarge) | sm_37 |
+
+**The faster R-CNN implementation is largely based on jwyang's repo and require complie of cython scripts.**
+
+Cython parts must be compiled using lib/make.sh.
+Please look at jwyang's readme for the details.
+
+https://github.com/jwyang/faster-rcnn.pytorch
+
+5. Apply Dataset Culling and train student models!
 Everything is in the script. The dataset will be constructed inside directory.
 
 ```py
@@ -114,7 +130,7 @@ python dataset-culling.py --datasetculling False
 
 ```
 
-5. Eval results. 
+6. Eval results. 
 
 
 ### Repo Progress
