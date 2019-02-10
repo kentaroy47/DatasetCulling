@@ -11,7 +11,6 @@ import copy
 import os
 import subprocess
 import argparse
-from util import filter_jackson
 
 parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
 parser.add_argument('--dataset', dest='dataset',

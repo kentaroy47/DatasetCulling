@@ -9,21 +9,6 @@ Created on Tue Jan  1 21:57:57 2019
 
 import numpy as np
 
-def filter_jackson(data):
-    for i, clsbox in enumerate(data):
-      for ii, boxes in enumerate(clsbox):
-          dellist=[]
-          for iii, box in enumerate(boxes):
-              out = box[0:5]
-#              print(out)
-              if (out[2]-out[0]) > 100 and (out[3]-out[1]) > 100 and i==7:
-                  dellist.append(iii)
-#                  print(out)
-                  
-          for row in reversed(dellist):
-             data[i][ii]=np.delete(data[i][ii],(row),axis=0) 
-    return(data)
-
 def addcars(datas):
     output = datas
     for i, data in enumerate(datas):

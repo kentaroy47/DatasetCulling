@@ -678,18 +678,12 @@ if __name__ == '__main__':
       diflist.append(diflist2)
   
   # concat cars and cyclists.
-  truth_boxes = addcars(truth_boxes)
-  truth_boxes = addcyclists(truth_boxes)
   if "tennis" in args.dataset or "badminton" in args.dataset:
       a=1
   else:
-      all_boxes = addcars(all_boxes)
+#      all_boxes = addcars(all_boxes)
 #      all_boxes = addcyclists(all_boxes)
-  
-  if "tennis" in args.dataset:
-      truth_boxes = filter_tennis(truth_boxes)
-      all_boxes = filter_tennis(all_boxes)
-  
+    
   aps = []
   for ncls, cls in enumerate(pascal_classes):
       if cls is not "__background__":
@@ -789,16 +783,6 @@ if __name__ == '__main__':
 
   end = time.time()
   print("test time: %0.4fs" % (end - start))
-
-
-# write output
-# define dataset
-  if "jackson" in args.image_dir:
-      target = "jackson"
-  elif "coral" in args.image_dir:
-      target = "coral"   
-  elif "shanghai" in args.image_dir:
-      target = "shanghai"
     
   import pickle
 #outfile = 'output/' + target + '-' + args.net + '.pkl'
