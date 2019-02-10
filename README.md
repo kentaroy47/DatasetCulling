@@ -124,10 +124,10 @@ https://github.com/jwyang/faster-rcnn.pytorch
 Everything is in the script. The dataset will be constructed inside directory.
 
 ```py
-# Construct dataset with Dataset Culling. This takes about ten minutes.
+# Construct dataset with Dataset Culling. This takes about 15 minutes with 1080Ti.
 python dataset-culling.py
 
-# Train wihout Dataset Culling. This takes two hours!!
+# Train wihout Dataset Culling. This takes about 2~3 hours with 1080Ti.
 python dataset-culling.py --datasetculling False
 
 ```
