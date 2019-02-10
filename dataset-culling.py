@@ -11,17 +11,20 @@ Created on Thu Jan 31 21:36:21 2019
 import subprocess
 import os
 import argparse
-
+import time
 parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
 parser.add_argument('--topx', dest='topx',
                       default=256)
 parser.add_argument('--dataset', dest='dataset',
                       default="jackson2")
 parser.add_argument('--nodatasetculling', action='store_false')
+parser.add_argument('--notrain', action='store_false')
+parser.add_argument('--notest', action='store_false')
 args = parser.parse_args()
 topx = str(args.topx)
 
 # print stuff
+start =time.time()
 print("Dataset culling is :", args.nodatasetculling)
 print("Culling the dataset to:", args.topx)
 print("Target dataset:", args.dataset)
@@ -70,4 +73,9 @@ subprocess.call(com, shell=True)
 
 # test DSM model.
 com = "python demo-and-eval-save.py --dataset pascal_voc_"+topx+"-"+target+" --cuda --net res18 --r True --checksession 1 --checkepoch 20 --image_dir images/jackson2_val --truth output/baseline/jackson2_val.pkl"
-subprocess.call(com, shell=True)
+if not args.notest:
+	subprocess.call(com, shell=True)
+
+end = time.time()
+print("total time taken:", end-start)
+

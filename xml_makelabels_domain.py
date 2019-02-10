@@ -32,7 +32,7 @@ args = parser.parse_args()
 target=args.dataset
 args.numobj=int(args.numobj)
 
-xmlsource = '/home/ken/datasets/VOC2007/VOCdevkit/VOC2007/Annotations/'
+xmlsource = './'
 datasource = 'images/'+target+'_train/*'
 resultsdir = 'output/baseline/'+target+'train-res101.pkl'
 if not args.dsm:
@@ -119,7 +119,7 @@ for file in files:
 
 
 # make template
-with open('/home/ken/datasets/VOC2007/VOCdevkit/VOC2007/Annotations/000001.xml') as fd:
+with open('./000001.xml') as fd:
     doc = xmltodict.parse(fd.read())
 del doc['annotation']['size']
 del doc['annotation']['filename']
