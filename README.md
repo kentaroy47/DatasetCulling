@@ -127,12 +127,13 @@ The dataset will be constructed inside directory.
 
 ```sh
 # Construct dataset with Dataset Culling. This takes about 15 minutes with 1080Ti.
+# The training is done with horizontal flipped data-argumentation.
 python dataset-culling.py
 
 # change the number of training sample like this. default is 256.
 python dataset-culling.py --topx 64
 
-# Train wihout Dataset Culling. This will take about 2~3 hours with 1080Ti.
+# Train wihout Dataset Culling. This will take about >3 hours with 1080Ti.
 python dataset-culling.py --topx 3600
 
 ```
