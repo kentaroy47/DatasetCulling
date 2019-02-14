@@ -46,13 +46,15 @@ arXiv: https://arxiv.org/abs/1811.02689
 # Setting up Dataset Culling enviroment
 
 ## Requirements
-Python3
+`Python3`
 
-Pytorch 0.4.0 (major code fix required for pytorch 1.0..)
+`Pytorch 0.4.0` (major code fix required for pytorch 1.0..)
 
-Cython
+`Cython`
 
-xmltodict
+`xmltodict`
+
+please install requirements by e.g. `pip install xmltodict cython`
 
 GPU enviroment required now. can add CPU options but not scheduled.
 
@@ -81,9 +83,9 @@ cd ..
 ```
 After this step, your "models" should include two files:
 
-faster_rcnn_500_40_625.pth (student 96MB)
+`faster_rcnn_500_40_625.pth` (student 96MB)
 
-faster_rcnn_1_10_9771.pth (teacher 367MB)
+`faster_rcnn_1_10_9771.pth` (teacher 367MB)
 
 3. Download example Dataset
 I provide an short video from youtubelive to get started.
@@ -149,10 +151,10 @@ python dataset-culling.py --notrain
 
 
 ### Repo Progress
-Upload initial commits (1/30/2019)
+~~Upload initial commits~~ (1/30/2019)
 
-Update readme (2/10/2019)
+~~Update readme~~ (2/10/2019)
 
-Update initial models and dataset (2/10/2019)
+~~Update initial models and dataset~~ (2/10/2019)
 
 Enable optResolution in pipeline (TBD. next week maybe?)
