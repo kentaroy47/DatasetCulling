@@ -5,7 +5,6 @@ from torch.autograd import Variable
 import numpy as np
 import torchvision.models as models
 from model.utils.config import cfg
-from model.roi_crop.functions.roi_crop import RoICropFunction
 import cv2
 import pdb
 import random
@@ -47,57 +46,16 @@ def clip_gradient(model, clip_norm):
     for p in model.parameters():
         if p.requires_grad:
             p.grad.mul_(norm)
+
 def vis_detections(im, class_name, dets, thresh=0.8):
     """Visual debugging of detections."""
     for i in range(np.minimum(10, dets.shape[0])):
         bbox = tuple(int(np.round(x)) for x in dets[i, :4])
         score = dets[i, -1]
         if score > thresh:
-            cv2.rectangle(im, bbox[0:2], bbox[2:4], (255, 0, 0), 6)
-#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
-#                        1.0, (0, 0, 255), thickness=1)
-    return im
-
-def vis_detections_personj(im, class_name, dets, thresh=0.8):
-    """Visual debugging of detections."""
-    for i in range(np.minimum(10, dets.shape[0])):
-        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
-        score = dets[i, -1]
-        if score > thresh and bbox[2]-bbox[0]<100:
-            cv2.rectangle(im, bbox[0:2], bbox[2:4], (255, 0, 0), 6)
-#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
-#                        1.0, (0, 0, 255), thickness=1)
-    return im
-
-def vis_detections_person(im, class_name, dets, thresh=0.8):
-    """Visual debugging of detections."""
-    for i in range(np.minimum(10, dets.shape[0])):
-        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
-        score = dets[i, -1]
-        if score > thresh:
-            cv2.rectangle(im, bbox[0:2], bbox[2:4], (255, 0, 0), 6)
-#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
-#                        1.0, (0, 0, 255), thickness=1)
-    return im
-def vis_detections_car(im, class_name, dets, thresh=0.8):
-    """Visual debugging of detections."""
-    for i in range(np.minimum(10, dets.shape[0])):
-        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
-        score = dets[i, -1]
-        if score > thresh:
-            cv2.rectangle(im, bbox[0:2], bbox[2:4], (0, 255, 0), 6)
-#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
-#                        1.0, (0, 0, 255), thickness=1)
-    return im
-def vis_detections_bike(im, class_name, dets, thresh=0.8):
-    """Visual debugging of detections."""
-    for i in range(np.minimum(10, dets.shape[0])):
-        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
-        score = dets[i, -1]
-        if score > thresh:
-            cv2.rectangle(im, bbox[0:2], bbox[2:4], (0, 0, 255), 6)
-#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
-#                        1.0, (0, 0, 255), thickness=1)
+            cv2.rectangle(im, bbox[0:2], bbox[2:4], (0, 204, 0), 2)
+            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
+                        1.0, (0, 0, 255), thickness=1)
     return im
 
 
@@ -111,7 +69,7 @@ def save_checkpoint(state, filename):
     torch.save(state, filename)
 
 def _smooth_l1_loss(bbox_pred, bbox_targets, bbox_inside_weights, bbox_outside_weights, sigma=1.0, dim=[1]):
-    
+
     sigma_2 = sigma ** 2
     box_diff = bbox_pred - bbox_targets
     in_box_diff = bbox_inside_weights * box_diff
@@ -127,7 +85,7 @@ def _smooth_l1_loss(bbox_pred, bbox_targets, bbox_inside_weights, bbox_outside_w
     return loss_box
 
 def _crop_pool_layer(bottom, rois, max_pool=True):
-    # code modified from 
+    # code modified from
     # https://github.com/ruotianluo/pytorch-faster-rcnn
     # implement it using stn
     # box to affine
@@ -177,7 +135,7 @@ def _crop_pool_layer(bottom, rois, max_pool=True):
       bottom = bottom.view(1, batch_size, D, H, W).contiguous().expand(roi_per_batch, batch_size, D, H, W)\
                                                                 .contiguous().view(-1, D, H, W)
       crops = F.grid_sample(bottom, grid)
-    
+
     return crops, grid
 
 def _affine_grid_gen(rois, input_size, grid_size):
@@ -234,31 +192,3 @@ def _affine_theta(rois, input_size):
       (x1 + x2 - width + 1) / (width - 1)], 1).view(-1, 2, 3)
 
     return theta
-
-def compare_grid_sample():
-    # do gradcheck
-    N = random.randint(1, 8)
-    C = 2 # random.randint(1, 8)
-    H = 5 # random.randint(1, 8)
-    W = 4 # random.randint(1, 8)
-    input = Variable(torch.randn(N, C, H, W).cuda(), requires_grad=True)
-    input_p = input.clone().data.contiguous()
-   
-    grid = Variable(torch.randn(N, H, W, 2).cuda(), requires_grad=True)
-    grid_clone = grid.clone().contiguous()
-
-    out_offcial = F.grid_sample(input, grid)    
-    grad_outputs = Variable(torch.rand(out_offcial.size()).cuda())
-    grad_outputs_clone = grad_outputs.clone().contiguous()
-    grad_inputs = torch.autograd.grad(out_offcial, (input, grid), grad_outputs.contiguous())
-    grad_input_off = grad_inputs[0]
-
-
-    crf = RoICropFunction()
-    grid_yx = torch.stack([grid_clone.data[:,:,:,1], grid_clone.data[:,:,:,0]], 3).contiguous().cuda()
-    out_stn = crf.forward(input_p, grid_yx)
-    grad_inputs = crf.backward(grad_outputs_clone.data)
-    grad_input_stn = grad_inputs[0]
-    pdb.set_trace()
-
-    delta = (grad_input_off.data - grad_input_stn).sum()

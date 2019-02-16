@@ -63,7 +63,6 @@ __C.TRAIN.SUMMARY_INTERVAL = 180
 __C.TRAIN.SCALES = (600,)
 
 # Max pixel size of the longest side of a scaled input image
-#__C.TRAIN.MAX_SIZE = 1280
 __C.TRAIN.MAX_SIZE = 1000
 
 # Trim size for input images to create minibatch
