@@ -14,7 +14,7 @@ import argparse
 import time
 parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
 parser.add_argument('--topx', dest='topx',
-                      default=256)
+                      default=200)
 parser.add_argument('--dataset', dest='dataset',
                       default="jackson2")
 parser.add_argument('--nodatasetculling', action='store_false')

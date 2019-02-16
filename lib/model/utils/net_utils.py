@@ -192,3 +192,46 @@ def _affine_theta(rois, input_size):
       (x1 + x2 - width + 1) / (width - 1)], 1).view(-1, 2, 3)
 
     return theta
+
+def vis_detections_personj(im, class_name, dets, thresh=0.8):
+    """Visual debugging of detections."""
+    for i in range(np.minimum(10, dets.shape[0])):
+        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
+        score = dets[i, -1]
+        if score > thresh and bbox[2]-bbox[0]<100:
+            cv2.rectangle(im, bbox[0:2], bbox[2:4], (255, 0, 0), 6)
+#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
+#                        1.0, (0, 0, 255), thickness=1)
+    return im
+
+def vis_detections_person(im, class_name, dets, thresh=0.8):
+    """Visual debugging of detections."""
+    for i in range(np.minimum(10, dets.shape[0])):
+        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
+        score = dets[i, -1]
+        if score > thresh:
+            cv2.rectangle(im, bbox[0:2], bbox[2:4], (255, 0, 0), 6)
+#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
+#                        1.0, (0, 0, 255), thickness=1)
+    return im
+def vis_detections_car(im, class_name, dets, thresh=0.8):
+    """Visual debugging of detections."""
+    for i in range(np.minimum(10, dets.shape[0])):
+        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
+        score = dets[i, -1]
+        if score > thresh:
+            cv2.rectangle(im, bbox[0:2], bbox[2:4], (0, 255, 0), 6)
+#            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
+#                        1.0, (0, 0, 255), thickness=1)
+    return im
+
+def vis_detections_bike(im, class_name, dets, thresh=0.8):
+    """Visual debugging of detections."""
+    for i in range(np.minimum(10, dets.shape[0])):
+        bbox = tuple(int(np.round(x)) for x in dets[i, :4])
+        score = dets[i, -1]
+        if score > thresh:
+            cv2.rectangle(im, bbox[0:2], bbox[2:4], (0, 204, 0), 2)
+            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_PLAIN,
+                        1.0, (0, 0, 255), thickness=1)
+    return im
