@@ -48,7 +48,8 @@ arXiv: https://arxiv.org/abs/1811.02689
 ## Requirements
 `Python3`
 
-`Pytorch 0.4.0` (major code fix required for pytorch 1.0..)
+`Pytorch 0.4.0` 
+### Go to `Pytorch 1.0` branch for that version!
 
 `Cython`
 
@@ -156,5 +157,7 @@ python dataset-culling.py --notrain
 ~~Update readme~~ (2/10/2019)
 
 ~~Update initial models and dataset~~ (2/10/2019)
+
+~ - Support Pytorch1.0 ~
 
 Enable optResolution in pipeline (TBD. next week maybe?)
