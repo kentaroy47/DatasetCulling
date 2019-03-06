@@ -150,6 +150,8 @@ You can just do test by..
 python dataset-culling.py --notrain
 ```
 
+# Contarct
+Ken Yoshioka (kyoshioka47@gmail.com)
 
 ### Repo Progress
 ~~Upload initial commits~~ (1/30/2019)
