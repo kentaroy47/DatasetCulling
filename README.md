@@ -1,3 +1,18 @@
+### Repo Progress
+~~Upload initial commits~~ (1/30/2019)
+
+~~Update readme~~ (2/10/2019)
+
+~~Update initial models and dataset~~ (2/10/2019)
+
+~~Support Pytorch1.0~~ (2/17/2019)
+
+I'm now working on the next step of the research. will get back when that cools down.
+
+- Enable optResolution in pipeline (working..)
+
+- Clean up install files. 
+
 # What is this?
 This is the implementation of the paper:
 
@@ -153,13 +168,4 @@ python dataset-culling.py --notrain
 # Contarct
 Ken Yoshioka (kyoshioka47@gmail.com)
 
-### Repo Progress
-~~Upload initial commits~~ (1/30/2019)
 
-~~Update readme~~ (2/10/2019)
-
-~~Update initial models and dataset~~ (2/10/2019)
-
-~ - Support Pytorch1.0 ~
-
-Enable optResolution in pipeline (TBD. next week maybe?)
