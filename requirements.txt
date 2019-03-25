@@ -1,0 +1,9 @@
+xmltodict
+numpy
+scipy
+ffmpeg
+easydict
+cython
+opencv-python
+pillow
+
