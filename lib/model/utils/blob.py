@@ -33,10 +33,23 @@ def im_list_to_blob(ims):
     return blob
 
 def prep_im_for_blob(im, pixel_means, target_size, max_size, usecaffe=False, smallstd=False):
-    """Mean subtract and scale an image for use in a blob."""
+    """if use caffe, preprocess is caffe. if not, preprocess is pytorch."""
+    #    print("caffe?",usecaffe)
+    if not usecaffe:
+        im = im.astype(np.float32, copy=False)
+        # changed to use pytorch models
+        im /= 255. # Convert range to [0,1]
+        pixel_means = [0.485, 0.456, 0.406]
+        im -= pixel_means # Minus mean
+        if not smallstd:
+            pixel_stdens = [0.229, 0.224, 0.225]
+        else:
+            pixel_stdens=[0.00392156, 0.00392156, 0.00392156] #for res10
+        im /= pixel_stdens # divide by stddev
+    else:
+        im = im.astype(np.float32, copy=False)
+        im -= pixel_means
 
-    im = im.astype(np.float32, copy=False)
-    im -= pixel_means
     # im = im[:, :, ::-1]
     im_shape = im.shape
     im_size_min = np.min(im_shape[0:2])
