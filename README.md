@@ -77,7 +77,7 @@ Don't hesitate to post issues or PRs if you find bugs. Thx.
 ```
 git clone https://github.com/kentaroy47/DatasetCulling.git
 cd DatasetCulling
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 2. Download pretrained student and teacher models.
