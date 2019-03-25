@@ -29,6 +29,9 @@ print("Dataset culling is :", args.nodatasetculling)
 print("Culling the dataset to:", args.topx)
 print("Target dataset:", args.dataset)
 
+# clear cache
+subprocess.call("rm data/cache/*")
+
 # target dataset
 target = args.dataset
 
