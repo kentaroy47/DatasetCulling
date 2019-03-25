@@ -30,7 +30,7 @@ print("Culling the dataset to:", args.topx)
 print("Target dataset:", args.dataset)
 
 # clear cache
-subprocess.call("rm data/cache/*")
+subprocess.call("rm data/cache/*", shell= True)
 
 # target dataset
 target = args.dataset
