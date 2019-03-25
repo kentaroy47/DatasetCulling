@@ -320,13 +320,18 @@ if __name__ == '__main__':
 
   sampler_batch = sampler(train_size, args.batch_size)
   
-  if args.net =='res10':
-      smallstd=True
+  if args.net =='res101':
+      caffepreprocess=True
+      print("preprocess in caffe")
   else:
-      smallstd=False
+      caffepreprocess=False
+      print("preprocess in pytorch")
+      
   print(imdb.num_classes)
+  
+  # if usecaffe=True, preprocess is caffe format.
   dataset = roibatchLoader(roidb, ratio_list, ratio_index, args.batch_size, \
-                           imdb.num_classes, training=True, usecaffe=smallstd)
+                           imdb.num_classes, training=True, usecaffe=caffepreprocess)
 
   dataloader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size,
                             sampler=sampler_batch, num_workers=args.num_workers)
@@ -357,7 +362,7 @@ if __name__ == '__main__':
   if args.net == 'vgg16':
     fasterRCNN = vgg16(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic)
   elif args.net == 'res101':
-    fasterRCNN = resnet(imdb.classes, 101, pretrained=True, class_agnostic=args.class_agnostic)
+    fasterRCNN = resnet(imdb.classes, 101, pretrained=False, class_agnostic=args.class_agnostic)
   elif args.net == 'res50':
     fasterRCNN = resnet(imdb.classes, 50, pretrained=False, class_agnostic=args.class_agnostic)
   elif args.net == 'res34':
