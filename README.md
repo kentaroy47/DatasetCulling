@@ -65,12 +65,6 @@ arXiv: https://arxiv.org/abs/1811.02689
 
 `Pytorch 0.4.0` 
 
-`Cython`
-
-`xmltodict`
-
-please install requirements by e.g. `pip install xmltodict cython`
-
 If you want to use `Pytorch 1.0`, plz go to the `Pytorch 1.0 branch`.
 
 GPU enviroment required. can add CPU options but not scheduled..
@@ -78,11 +72,12 @@ GPU enviroment required. can add CPU options but not scheduled..
 Don't hesitate to post issues or PRs if you find bugs. Thx.
 
 ## Instalation
-1. Clone this repo.
+1. Clone this repo and pip dependencies.
 
 ```
 git clone https://github.com/kentaroy47/DatasetCulling.git
 cd DatasetCulling
+pip install requirements.txt
 ```
 
 2. Download pretrained student and teacher models.
