@@ -64,7 +64,6 @@ arXiv: https://arxiv.org/abs/1811.02689
 `Python3`
 
 `Pytorch 0.4.0` 
-### Go to `Pytorch 1.0` branch for that version!
 
 `Cython`
 
@@ -72,7 +71,9 @@ arXiv: https://arxiv.org/abs/1811.02689
 
 please install requirements by e.g. `pip install xmltodict cython`
 
-GPU enviroment required now. can add CPU options but not scheduled.
+If you want to use `Pytorch 1.0`, plz go to the `Pytorch 1.0 branch`.
+
+GPU enviroment required. can add CPU options but not scheduled..
 
 Don't hesitate to post issues or PRs if you find bugs. Thx.
 
