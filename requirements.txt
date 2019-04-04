@@ -6,4 +6,5 @@ easydict
 cython
 opencv-python
 pillow
+matplotlib
 
