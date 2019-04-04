@@ -614,6 +614,6 @@ if __name__ == '__main__':
   
     
   import pickle
-  outfile = 'output/' + args.target + '-' + args.net + '-' + args.topx + '.pkl'
+  outfile = 'output/' + args.target + '-' + args.net + '.pkl'
   with open(outfile, 'wb') as f:
           pickle.dump(all_boxes, f, pickle.HIGHEST_PROTOCOL)
