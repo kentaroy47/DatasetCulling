@@ -140,6 +140,8 @@ You can just do test by..
 python dataset-culling.py --notrain
 ```
 
+### Try cleaning up data/cache or output/ folder if training does not start.
+
 # Contarct
 Ken Yoshioka (kyoshioka47@gmail.com)
 
