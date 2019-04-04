@@ -80,38 +80,17 @@ cd DatasetCulling
 pip install -r requirements.txt
 ```
 
-2. Download pretrained student and teacher models.
+2. Download pretrained student and teacher models + image files to get started.
 
 ```
-mkdir models/
-cd models
-
-# resnet101 teacher. Note that this is in caffe normalization..
-Download.. https://www.dropbox.com/s/dpq6qv0efspelr3/faster_rcnn_1_10_9771.pth?dl=0
-
-# resnet18 student
-Download.. https://drive.google.com/file/d/1KvrBMDYD5QtccjWbeKsLDZj6gBYRwVum/view?usp=sharing
-cd ..
-```
-After this step, your "models" should include two files:
-
-`faster_rcnn_500_40_625.pth` (student 96MB)
-
-`faster_rcnn_1_10_9771.pth` (teacher 367MB)
-
-3. Download example Dataset
-I provide an short video from youtubelive to get started.
-If you are further interested, try downloading more videos from youtube and apply DatasetCulling!
-
-```
-Download..  https://drive.google.com/file/d/1TnNcOpLqJzBwqYfRs7Oh8WRHOlk6I5ET/view?usp=sharing
+wget https://www.dropbox.com/s/jjzwo4jxglh407i/files.tar.gz
 
 # extract in the repo dir.
-tar -zxvf images.tar.gz
+tar -zxvf files.tar.gz
 
 ```
 
-4. Compile Cython scripts.
+3. Compile Cython scripts.
 ```
 cd lib
 sh make.sh
@@ -134,7 +113,7 @@ Please look at jwyang's readme for the details.
 
 https://github.com/jwyang/faster-rcnn.pytorch
 
-5. Apply Dataset Culling and train student models!
+4. Apply Dataset Culling and train student models!
 Everything is in the script.
  
 The dataset will be constructed inside directory.
@@ -152,7 +131,7 @@ python dataset-culling.py --topx 3600
 
 ```
 
-6. Eval results. 
+5. Eval results. 
 The test is also done in dataset-culling.
 
 You can just do test by..
