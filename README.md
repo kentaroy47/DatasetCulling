@@ -48,13 +48,9 @@ arXiv: https://arxiv.org/abs/1811.02689
 ## Requirements
 `Python3`
 
-`Pytorch 0.4.0` (major code fix required for pytorch 1.0..)
+`Pytorch >1.0` 
 
-`Cython`
-
-`xmltodict`
-
-please install requirements by e.g. `pip install xmltodict cython`
+please install requirements by e.g. `pip install -r requirements.txt`
 
 GPU enviroment required now. can add CPU options but not scheduled.
 
@@ -64,22 +60,19 @@ Don't hesitate to post issues or PRs if you find bugs. Thx.
 1. Clone this repo.
 
 ```
-git clone https://github.com/kentaroy47/DatasetCulling.git
+git clone  --single-branch --branch pytorch-1.0 https://github.com/kentaroy47/DatasetCulling.git
 cd DatasetCulling
+pip install -r requirements.txt
 ```
 
 2. Download pretrained student and teacher models.
 
 ```
-mkdir models/
-cd models
+wget https://www.dropbox.com/s/jjzwo4jxglh407i/files.tar.gz
 
-# resnet101 teacher. Note that this is in caffe normalization..
-Download.. https://www.dropbox.com/s/dpq6qv0efspelr3/faster_rcnn_1_10_9771.pth?dl=0
+# extract in the repo dir.
+tar -zxvf files.tar.gz
 
-# resnet18 student
-Download.. https://drive.google.com/file/d/1KvrBMDYD5QtccjWbeKsLDZj6gBYRwVum/view?usp=sharing
-cd ..
 ```
 After this step, your "models" should include two files:
 
@@ -87,17 +80,6 @@ After this step, your "models" should include two files:
 
 `faster_rcnn_1_10_9771.pth` (teacher 367MB)
 
-3. Download example Dataset
-I provide an short video from youtubelive to get started.
-If you are further interested, try downloading more videos from youtube and apply DatasetCulling!
-
-```
-Download..  https://drive.google.com/file/d/1TnNcOpLqJzBwqYfRs7Oh8WRHOlk6I5ET/view?usp=sharing
-
-# extract in the repo dir.
-tar -zxvf images.tar.gz
-
-```
 
 4. Compile.
 ```
