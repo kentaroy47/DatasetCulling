@@ -33,7 +33,7 @@ args.numobj=int(args.numobj)
 
 xmlsource = './'
 datasource = 'images/'+target+'_train/*'
-resultsdir = 'output/baseline/'+args.topx+'-'+target+'train-res101.pkl'
+resultsdir = 'output/baseline/'+target+'train-res101.pkl'
 if not args.dsm:
     valdir = 'output/baseline/'+target+'val-res101.pkl'
 else:
