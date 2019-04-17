@@ -56,7 +56,9 @@ subprocess.call(com, shell=True)
 
 # make teacher predictions.
 print("making teacher predictions..")
-if not (os.path.isfile("output/"+topx+'-'+target+"-res101.pkl")):
+if not os.path.isdir("output/baseline"):
+    subprocess.call("mkdir output/baseline")
+if not (os.path.isfile("output/baseline"+topx+'-'+target+"train-res101.pkl")):
     com = "python demo-and-eval-save-teacher.py --topx "+topx+" --target "+target+" --net res101 --image_dir images/confusion-"+target+" --coco True --cuda --dataset pascal_voc --checksession 1 --checkepoch 10 --checkpoint 9771"
     subprocess.call(com, shell=True)
 
