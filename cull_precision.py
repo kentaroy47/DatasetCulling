@@ -53,7 +53,7 @@ for x in [1]:
        # obtain predictions of teacher
         with open("output/"+dataset+"-confusion-res18.pkl", "rb") as f:
            student = pickle.load(f)
-        with open("output/"+dataset+"-res101-"+topx+".pkl", "rb") as f:
+        with open("output/baseline/"+topx+"-"+dataset+"train-res101.pkl", "rb") as f:
            teacher = pickle.load(f)
        # get image list
         temp = sorted(glob.glob("images/confusion-"+dataset+"/*"))
