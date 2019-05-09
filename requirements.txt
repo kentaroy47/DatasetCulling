@@ -1,0 +1,11 @@
+xmltodict
+numpy
+scipy
+ffmpeg
+easydict
+cython
+opencv-python
+pillow
+matplotlib
+pyyaml
+#git+https://github.com/waleedka/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI
