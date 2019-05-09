@@ -491,7 +491,10 @@ if __name__ == '__main__':
 #                    continue
 #                print("disabling training for layer", nlayer)   
 #                param.requires_grad = False
-    print(fasterRCNN)                              
+    print(fasterRCNN)
+      
+    if args.cuda:
+        fasterRCNN.cuda()
         
     if not args.dataset == "coco":# and args.optimizer == "adam":
         weight_decay = optimizer.param_groups[0]['weight_decay']
@@ -532,9 +535,6 @@ if __name__ == '__main__':
         
   if args.mGPUs:
     fasterRCNN = nn.DataParallel(fasterRCNN)
-
-  if args.cuda:
-    fasterRCNN.cuda()
 
   iters_per_epoch = int(train_size / args.batch_size)
 
