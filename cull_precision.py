@@ -5,8 +5,6 @@ Created on Mon Nov 26 15:33:23 2018
 
 @author: ken
 
-v1.. just count the number of objects not regarding the class.
-v2.. pick the image that has most object in class, respectively.
 """
 
 import subprocess
@@ -47,8 +45,6 @@ finalconfusion = []
 for x in [1]:
     for y in [1]:
         imagelist = []
-
-        
         dataset = args.dataset
        # obtain predictions of teacher
         with open("output/"+dataset+"-confusion-res18.pkl", "rb") as f:
