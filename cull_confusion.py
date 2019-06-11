@@ -50,8 +50,6 @@ finalltrain = []
 for x in [1]:
     for y in [1]:
         imagelist = []
-
-        
         dataset = args.dataset
         # read pickle
         with open("output/"+dataset+"-res18.pkl", "rb") as f:
@@ -85,7 +83,8 @@ for x in [1]:
            finalltrain.extend(ltrain[:-1])
         else:
            finalltrain.extend(ltrain)
-           # make prediction list
+        
+        # make prediction list
         student = conv20class(student)
         if len(student[7])!=len(imagelist):
            predictionlist = add_answer_cut(predictionlist, student)
@@ -117,7 +116,7 @@ for i, image in enumerate(finalimagelist):
         
 # make predictions
 finalpredictions = choose_answer_limit(predictionlist, range(0,21), top_key)
-
+# dump
 with open("output/"+dataset+"-confusion-res18.pkl", 'wb') as f:
     pickle.dump(finalpredictions, f, pickle.HIGHEST_PROTOCOL)
         
