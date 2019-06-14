@@ -11,6 +11,8 @@
 
 - Clean up install files. 
 
+- Fixed the download link for the models.
+
 # What is this?
 This is the implementation of the paper:
 
