@@ -20,6 +20,7 @@ parser.add_argument('--dataset', dest='dataset',
 parser.add_argument('--nodatasetculling', action='store_false')
 parser.add_argument('--notrain', action='store_false')
 parser.add_argument('--notest', action='store_false')
+parser.add_argument('--forceinfer', action='store_false')
 args = parser.parse_args()
 topx = str(args.topx)
 
@@ -45,7 +46,7 @@ subprocess.call("mkdir images",shell=True)
 # make dataset.
 # make student predictions
 print("making predictions using student model..")
-if not (os.path.isfile("output/"+target+"-res18.pkl")):
+if not (os.path.isfile("output/"+target+"-res18.pkl")) or args.forceinfer:
     com = "python demo-and-eval-save-student.py --vis --topx "+topx+" --target "+target+" --net res18 --image_dir images/"+target+"_train --coco True --cuda --dataset pascal_voc --checksession 500 --checkepoch 40 --checkpoint 625"
     subprocess.call(com, shell=True)
 
@@ -58,7 +59,7 @@ subprocess.call(com, shell=True)
 print("making teacher predictions..")
 if not os.path.isdir("output/baseline"):
     subprocess.call("mkdir output/baseline")
-if not (os.path.isfile("output/baseline/"+topx+'-'+target+"train-res101.pkl")):
+if not (os.path.isfile("output/baseline/"+topx+'-'+target+"train-res101.pkl")) or args.forceinfer:
     com = "python demo-and-eval-save-teacher.py --topx "+topx+" --target "+target+" --net res101 --image_dir images/confusion-"+target+" --coco True --cuda --dataset pascal_voc --checksession 1 --checkepoch 10 --checkpoint 9771"
     subprocess.call(com, shell=True)
 
