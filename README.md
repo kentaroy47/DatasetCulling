@@ -83,7 +83,7 @@ pip install -r requirements.txt
 2. Download pretrained student and teacher models + image files to get started.
 
 ```
-wget https://www.dropbox.com/s/jjzwo4jxglh407i/files.tar.gz
+wget https://www.dropbox.com/s/ew47jhdu67bdocf/files.tar.gz
 
 # extract in the repo dir.
 tar -zxvf files.tar.gz
