@@ -1,3 +1,16 @@
+
+
+# What is this?
+This is the implementation of the paper:
+
+**Dataset Culling: Towards efficient training of distillation based domain specific models.**
+
+Kentaro Yoshioka, Edward Lee, Simon Wong, Mark Horowitz (Stanford)
+
+IEEE ICIP 2019
+
+https://arxiv.org/abs/1902.00173
+
 ### Repo Progress
 ~~Upload initial commits~~ (1/30/2019)
 
@@ -12,15 +25,6 @@
 - Clean up install files. 
 
 - Fixed the download link for the models.
-
-# What is this?
-This is the implementation of the paper:
-
-**Dataset Culling: Towards efficient training of distillation based domain specific models.**
-
-Kentaro Yoshioka, Edward Lee, Simon Wong, Mark Horowitz (Stanford)
-
-https://arxiv.org/abs/1902.00173
 
 ## What is Dataset Culling?
 By training a domain specific model (say, a specific model for each traffic camera) we can get high accuracy even with a small model.
