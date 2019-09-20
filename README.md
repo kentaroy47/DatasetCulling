@@ -1,4 +1,4 @@
-
+![Results](https://github.com/kentaroy47/DatasetCulling/blob/master/figure-of-dataset.png)
 
 # What is this?
 This is the implementation of the paper:
@@ -38,14 +38,12 @@ We simply *cull* those *easy-to-classify* data out in the proposed pipeline, gai
 Interestingly, for some data, we even find some accuracy improvements by Dataset Culling.
 
 ## Results of Dataset Culling
-![Results](https://github.com/kentaroy47/DatasetCulling/blob/master/figure-of-dataset.png)
-Here are results of three scenes (more results in paper).
 
 We can get compared to large teacher models: 
 
-1) upto 18x computation efficiency!
+1) upto 18x computation efficiency
 
-2) Similar or better detection accuracy!
+2) Similar or better detection accuracy
 
 ## what does this repo do?
 This repo lets you try the pipeline with some domain specific data (traffic camera from YoutubeLive) and some pretrained models (COCO trained res18, res101 based FR-CNNs.)
