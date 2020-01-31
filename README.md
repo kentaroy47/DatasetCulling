@@ -1,5 +1,7 @@
 ![Results](https://github.com/kentaroy47/DatasetCulling/blob/master/figure-of-dataset.png)
 
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+
 # What is this?
 This is the implementation of the paper:
 
